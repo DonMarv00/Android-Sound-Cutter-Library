@@ -1,6 +1,8 @@
 # Android-Sound-Cutter-Library
 Sound Cutter Library for Android based on Google's Ringdroid App. Tested with Android 11
 
+<img src="https://api.citroncode.com/shared/audiocutter.jpg" width="280" alt="Screenshot 1">
+ 
 # Usage
 
 Step 1. Add the JitPack repository to your build file
@@ -42,7 +44,7 @@ cutterView.saveSound("File name goes here");
 
 3. saveInternal()
 
-returns the file path of the cutted sound in the app folder (located at /data/data<package name>)
+returns the file path of the cutted sound in the app folder (located at /data/data/package-name)
 
 # TODO
 - Callback when file was saved
