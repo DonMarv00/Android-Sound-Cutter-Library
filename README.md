@@ -17,6 +17,7 @@ Step 2. Add the dependency
 ```
 dependencies {
 	  implementation 'com.github.MarvinStelter:Android-Sound-Cutter-Library:v1.0.0'
+	  implementation 'com.github.HBiSoft:PickiT:2.0.5'
 }
 ```
 
