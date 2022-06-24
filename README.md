@@ -29,7 +29,6 @@ Just provide the uri from the file picker but make sure that the app has file pe
 ```
 CutterView cutterView = binding.cutterview;
 cutterView.setSound(uri,this,MainActivity.this);
-
 ```
 
 2. saveSound()
@@ -38,7 +37,6 @@ The file will be saved to the Music folder as an .mp3 file
 
 ```
 cutterView.saveSound("File name goes here");
-
 ```
 
 3. saveInternal()
