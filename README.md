@@ -22,7 +22,13 @@ dependencies {
 	  implementation 'com.github.HBiSoft:PickiT:2.0.5'
 }
 ```
-
+Step 3. Add the View to your Layout
+```
+<com.citroncode.soundcutter.CutterView
+        android:layout_width="wrap_content"
+        android:id="@+id/cutterview"
+        android:layout_height="wrap_content"/>
+```
 # Functions
 
 1. setSound
