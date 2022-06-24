@@ -1,7 +1,7 @@
 # Android-Sound-Cutter-Library
 Sound Cutter Library for Android based on Google's Ringdroid App. Tested with Android 11
 
-#Usage
+# Usage
 
 Step 1. Add the JitPack repository to your build file
 
@@ -20,7 +20,7 @@ dependencies {
 }
 ```
 
-#Functions
+# Functions
 
 1. setSound
 
@@ -45,7 +45,7 @@ cutterView.saveSound("File name goes here");
 
 returns the file path of the cutted sound in the app folder (located at /data/data<package name>)
 
-#TODO
+# TODO
 - Callback when file was saved
 - Add FFMPEG to cut and save files
 - Design changes with xml attributes
