@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">SoundCutterLibrary</string>
+    <string name="load">Load</string>
+    <string name="save">Save</string>
+    <string name="error">Error: </string>
+    <string name="cancel">Cancle</string>
+</resources>

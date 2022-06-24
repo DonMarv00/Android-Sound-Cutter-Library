@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Soundcutter</string>
+    <string name="loading">Loading...</string>
+    <string name="error_fnf">Error: File not found</string>
+    <string name="error_io">Error: IO Exception</string>
+    <string name="soundname">Soundname</string>
+</resources>

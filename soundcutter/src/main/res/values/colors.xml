@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#000000</color>
+    <color name="teal_700">#000000</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+
+    <color name="trans">#054C44</color>
+    <color name="waveform_selected">#26D367</color>
+    <color name="waveform_unselected">@color/trans</color>
+    <color name="waveform_unselected_bkgnd_overlay">@color/purple_500</color>
+    <color name="selection_border">#FFFFFF</color>
+    <color name="playback_indicator">@color/purple_500</color>
+    <color name="grid_line">#66ffffff</color>
+    <color name="timecode">#FFFFFF</color>
+    <color name="timecode_shadow">#aa000000</color>
+    <drawable name="type_bkgnd_unsupported">#88cccccc</drawable>
+
+    <color name="colorGrayAlpha">#80000000</color>
+    <color name="colorBlue">#0e1f2f</color>
+    <color name="colorTextGray">#ADADAD</color>
+    <color name="colorBg">#000000</color>
+    <color name="colorBlack">#000</color>
+    <color name="colorGridLine">#00ed1b24</color>
+    <color name="colorSelectionBorder">#9c41bc</color>
+    <color name="colorWaveformBg">#253571</color>
+    <color name="colorPlaybackIndicator">#b2253571</color>
+    <color name="colorTimeCode">#dd253571</color>
+    <color name="colorTimeCodeShadow">#aa253571</color>
+    <color name="waveformSelected">#adb5cc</color>
+    <color name="waveformUnselected">#adb5cc</color>
+    <color name="waveformUnselectedBackground">#e8e6e7</color>
+
+
+    <color name="colorMarker">#000000</color>
+    <color name="colorPlaybackMarker">#000000</color>
+    <color name="controlsColor">#000000</color>
+    <color name="colorIconControls">#FFFFFF</color>
+</resources>
