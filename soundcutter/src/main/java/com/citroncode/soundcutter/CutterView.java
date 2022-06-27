@@ -66,6 +66,7 @@ public class CutterView extends FrameLayout implements  MarkerView.MarkerListene
     String extension;
     private WaveformView mWaveformView;
     private MarkerView mStartMarker;
+    boolean savedInternal;
     private MarkerView mEndMarker;
     private FloatingActionButton mPlayButton;
     private FloatingActionButton mRewindButton;
@@ -984,11 +985,61 @@ public class CutterView extends FrameLayout implements  MarkerView.MarkerListene
         //TODO Shows ads
     }
     public String saveInternal(){
+        double startTime = mWaveformView.pixelsToSeconds(mStartPos);
+        double endTime = mWaveformView.pixelsToSeconds(mEndPos);
+        final int startFrame = mWaveformView.secondsToFrames(startTime);
+        final int endFrame = mWaveformView.secondsToFrames(endTime);
+
+
+        mSaveSoundFileThread = new Thread() {
+            public void run() {
+                // Try AAC first.
+                String outPath = makeRingtoneFilename(".mp3");
+                final String finalOutPath1 = outPath;
+
+                File outFile = new File(outPath);
+                try {
+                    // Write the new file
+                    mSoundFile.WriteFile(outFile, startFrame, endFrame - startFrame);
+                } catch (Exception e) {
+                    // log the error and try to create a .wav file instead
+                    if (outFile.exists()) {
+                        outFile.delete();
+                    }
+                    StringWriter writer = new StringWriter();
+                    e.printStackTrace(new PrintWriter(writer));
+                    Log.e("Ringdroid", "Error: Failed to create " + outPath);
+                    Log.e("Ringdroid", writer.toString());
+                }
+
+
+                try {
+                    final SoundFile.ProgressListener listener =
+                            frac -> true;
+                    SoundFile.create(outPath, listener);
+                } catch (final Exception e) {
+                    e.printStackTrace();
+
+                    Runnable runnable = () -> toastMsg("Error: " + e.getMessage());
+                    mHandler.post(runnable);
+                    return;
+                }
+
+                if(outFile.exists()){
+                    extension = ".mp3";
+                    savedInternal = true;
+                }else{
+                    savedInternal = false;
+                }
+
+            }
+        };
+        mSaveSoundFileThread.start();
         File storage = ctx.getFilesDir();
         File directory = new File(storage.getAbsolutePath());
-
         SharedPreferences sp_counter = ctx.getSharedPreferences("cutter",0);
         int counter = sp_counter.getInt("counter",0);
         return directory + "/temp_sound_" + counter + ".mp3";
+
     }
 }
