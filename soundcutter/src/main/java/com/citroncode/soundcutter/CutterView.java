@@ -1039,6 +1039,7 @@ public class CutterView extends FrameLayout implements  MarkerView.MarkerListene
         File directory = new File(storage.getAbsolutePath());
         SharedPreferences sp_counter = ctx.getSharedPreferences("cutter",0);
         int counter = sp_counter.getInt("counter",0);
+        counter = counter - 1;
         return directory + "/temp_sound_" + counter + ".mp3";
 
     }
