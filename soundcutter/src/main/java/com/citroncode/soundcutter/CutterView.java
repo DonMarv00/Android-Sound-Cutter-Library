@@ -1,5 +1,6 @@
 package com.citroncode.soundcutter;
 
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
@@ -72,6 +73,7 @@ public class CutterView extends FrameLayout implements  MarkerView.MarkerListene
     private FloatingActionButton mRewindButton;
     private FloatingActionButton mFfwdButton;
     private boolean mKeyDown;
+    Activity activityGlobal;
     private int mWidth;
     private Thread mSaveSoundFileThread;
     private int mMaxPos;
@@ -85,6 +87,7 @@ public class CutterView extends FrameLayout implements  MarkerView.MarkerListene
     private int mPlayStartMsec;
     private int mPlayEndMsec;
     private Handler mHandler;
+    public boolean isLoading;
     private boolean mIsPlaying;
     private SamplePlayer mPlayer;
     private boolean mTouchDragging;
@@ -129,8 +132,10 @@ public class CutterView extends FrameLayout implements  MarkerView.MarkerListene
     }
 
     public void setSound(Uri soundfile, Context context, Activity activity){
+       isLoading = true;
         pickiT = new PickiT(activity, this, activity);
         ctx = context;
+        activityGlobal = activity;
 
         pickiT.getPath(soundfile, Build.VERSION.SDK_INT);
 
@@ -154,11 +159,12 @@ public class CutterView extends FrameLayout implements  MarkerView.MarkerListene
         DisplayMetrics metrics = new DisplayMetrics();
         mDensity = metrics.density;
 
+
+
         mMarkerLeftInset = (int)(46 * mDensity);
         mMarkerRightInset = (int)(48 * mDensity);
-        mMarkerTopOffset = (int)(10 * mDensity);
+        mMarkerTopOffset = (int)(10* mDensity);
         mMarkerBottomOffset = (int)(10 * mDensity);
-
 
         mPlayButton = findViewById(R.id.play);
         mPlayButton.setOnClickListener(mPlayListener);
@@ -247,7 +253,7 @@ public class CutterView extends FrameLayout implements  MarkerView.MarkerListene
                     e.printStackTrace();
 
                     Runnable runnable = () -> {
-                       toastMsg(e.toString());
+                        toastMsg(e.toString());
                         Log.e("SoundCutter",e.getMessage());
                     };
                     mHandler.post(runnable);
@@ -261,6 +267,8 @@ public class CutterView extends FrameLayout implements  MarkerView.MarkerListene
                     markerRight.setVisibility(VISIBLE);
                     waveformView.setVisibility(VISIBLE);
                     layoutControls.setVisibility(VISIBLE);
+
+                    isLoading = false;
                 });
                 if (mLoadingKeepGoing) {
                     Runnable runnable = () -> finishOpeningSoundFile();
@@ -351,9 +359,9 @@ public class CutterView extends FrameLayout implements  MarkerView.MarkerListene
         mWaveformView.invalidate();
 
         mStartMarker.setContentDescription("StartMarker " +
-                        formatTime(mStartPos));
+                formatTime(mStartPos));
         mEndMarker.setContentDescription("Endmarker " +
-                        formatTime(mEndPos));
+                formatTime(mEndPos));
 
         int startX = mStartPos - mOffset - mMarkerLeftInset;
         if (startX + mStartMarker.getWidth() >= 0) {
@@ -697,7 +705,7 @@ public class CutterView extends FrameLayout implements  MarkerView.MarkerListene
             updateDisplay();
             enableDisableButtons();
         } catch (Exception e) {
-           toastMsg("Read error");
+            toastMsg("Read error");
 
         }
     }
@@ -1039,7 +1047,11 @@ public class CutterView extends FrameLayout implements  MarkerView.MarkerListene
         File directory = new File(storage.getAbsolutePath());
         SharedPreferences sp_counter = ctx.getSharedPreferences("cutter",0);
         int counter = sp_counter.getInt("counter",0);
+        counter = counter + 1;
         return directory + "/temp_sound_" + counter + ".mp3";
 
+    }
+    public boolean isLoading(){
+        return isLoading;
     }
 }
