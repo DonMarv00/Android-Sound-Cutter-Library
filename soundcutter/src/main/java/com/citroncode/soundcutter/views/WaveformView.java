@@ -599,4 +599,7 @@ public class WaveformView extends View {
         mUnselectedLinePaint.setColor(Color.parseColor(waveformViewUnselected));
         mUnselectedBkgndLinePaint.setColor(Color.parseColor(waveformUnselectedBkg));
     }
+    public void setMarkerLineColor(String color){
+        mBorderLinePaint.setColor(Color.parseColor(color));
+    }
 }

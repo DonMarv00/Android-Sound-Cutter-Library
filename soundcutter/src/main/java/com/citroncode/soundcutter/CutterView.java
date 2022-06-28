@@ -1054,4 +1054,7 @@ public class CutterView extends FrameLayout implements  MarkerView.MarkerListene
     public boolean isLoading(){
         return isLoading;
     }
+    public void setMarkerLineColor(String color){
+        waveformView.setMarkerLineColor(color);
+    }
 }
