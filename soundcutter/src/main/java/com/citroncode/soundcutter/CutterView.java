@@ -1051,6 +1051,9 @@ public class CutterView extends FrameLayout implements  MarkerView.MarkerListene
         return directory + "/temp_sound_" + counter + ".mp3";
 
     }
+                public boolean wasSaved(){
+        return savedInternal;
+    }
     public boolean isLoading(){
         return isLoading;
     }
