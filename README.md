@@ -52,8 +52,8 @@ Here an example to check if the sound has been saved:
 ```
  Boolean stop = false;
 
- private void save(String name, String path_normal, String path_clicked){
-        cutterView.saveSound("File name goes here");
+ private void save(String name){
+        cutterView.saveSound(name);
 	ProgressDialog pg_dialog = new ProgressDialog(this);
         pg_dialog.setMessage(getResources().getString(R.string.please_wait_this_may_take_a_moment));
         pg_dialog.setCancelable(false);
