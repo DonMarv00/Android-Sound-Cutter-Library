@@ -48,6 +48,38 @@ The file will be saved to the Music folder as an .mp3 file
 cutterView.saveSound("File name goes here");
 ```
 
+Here an example to check if the sound has been saved:
+```
+ Boolean stop = false;
+
+ private void save(String name, String path_normal, String path_clicked){
+        cutterView.saveSound("File name goes here");
+	ProgressDialog pg_dialog = new ProgressDialog(this);
+        pg_dialog.setMessage(getResources().getString(R.string.please_wait_this_may_take_a_moment));
+        pg_dialog.setCancelable(false);
+        pg_dialog.show();
+
+            Handler handler = new Handler();
+            Runnable r = new Runnable() {
+                public void run() {
+                    if(cutterView.wasSaved() && savedAudio.length() != 0){
+                    	//Do whatever you want, the sound has been saved!
+                        pg_dialog.dismiss();
+                        stop = true;
+                        finish();
+                    }
+                    if (!stop) {
+                        handler.postDelayed(this, 1000);
+                    }
+
+                }
+            };
+
+            handler.postDelayed(r, 1000);
+
+    }
+```
+
 3. saveInternal()
 
 returns the file path of the cutted sound in the app folder (located at /data/data/package-name)
