@@ -31,13 +31,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
+
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AlertDialog;
+
 import com.citroncode.soundcutter.soundfile.SoundFile;
 import com.citroncode.soundcutter.utils.SamplePlayer;
 import com.citroncode.soundcutter.utils.SingleMediaScanner;
-import com.citroncode.soundcutter.utils.Utility;
+
 import com.citroncode.soundcutter.views.MarkerView;
 import com.citroncode.soundcutter.views.WaveformView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -45,7 +45,7 @@ import com.hbisoft.pickit.PickiT;
 import com.hbisoft.pickit.PickiTCallbacks;
 
 import java.io.File;
-import java.io.FileDescriptor;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -53,12 +53,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.io.RandomAccessFile;
 import java.io.StringWriter;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-
-import linc.com.library.AudioTool;
 
 public class CutterView extends FrameLayout implements  MarkerView.MarkerListener,
         WaveformView.WaveformListener, PickiTCallbacks {
