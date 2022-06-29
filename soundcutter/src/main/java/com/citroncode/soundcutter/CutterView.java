@@ -55,7 +55,10 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.RandomAccessFile;
 import java.io.StringWriter;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+
+import linc.com.library.AudioTool;
 
 public class CutterView extends FrameLayout implements  MarkerView.MarkerListener,
         WaveformView.WaveformListener, PickiTCallbacks {
@@ -1043,6 +1046,7 @@ public class CutterView extends FrameLayout implements  MarkerView.MarkerListene
             }
         };
         mSaveSoundFileThread.start();
+
         File storage = ctx.getFilesDir();
         File directory = new File(storage.getAbsolutePath());
         SharedPreferences sp_counter = ctx.getSharedPreferences("cutter",0);
@@ -1059,5 +1063,63 @@ public class CutterView extends FrameLayout implements  MarkerView.MarkerListene
     }
     public void setMarkerLineColor(String color){
         waveformView.setMarkerLineColor(color);
+    }
+    public void SaveWithCallback(String name){
+        double startTime = mWaveformView.pixelsToSeconds(mStartPos);
+        double endTime = mWaveformView.pixelsToSeconds(mEndPos);
+        final int startFrame = mWaveformView.secondsToFrames(startTime);
+        final int endFrame = mWaveformView.secondsToFrames(endTime);
+
+
+        String filePath;
+        File storage = ctx.getFilesDir();
+        File directory = new File(storage.getAbsolutePath());
+
+        SharedPreferences sp_counter = ctx.getSharedPreferences("cutter",0);
+        int counter = sp_counter.getInt("counter",0);
+        filePath = directory + "/temp_sound_" + counter + ".mp3";
+        File inputfile = new File(filePath);
+
+
+        DecimalFormat df = new DecimalFormat("0.00");
+        String startRounded = df.format(startTime);
+        String endRounded = df.format(endTime);
+
+        double updatedEnd = endTime - startTime;
+        String endUpdated = df.format(updatedEnd);
+
+
+    try {
+        int startInMinutes, endInMinutes;
+        String start = "";
+        if(startTime > 60.00){
+            double calc = startTime / 60;
+            int chars = (int)Math.log10(calc)+1;
+            if(chars == 1){
+                String calcForCut = df.format(calc);
+                String[] splitter = calcForCut.split("\\.");
+                start = "00:0" +  splitter[0] + ":" + splitter[1];
+            }else{
+                String calcForCut = df.format(calc);
+                String[] splitter = calcForCut.split(".");
+                start = "00:" +  splitter[0] + ":" + splitter[1];
+            }
+        }else{
+
+        }
+        Toast.makeText(activityGlobal, "Start: " + start +  "End: " + endUpdated, Toast.LENGTH_SHORT).show();
+
+
+    }catch (Exception e){
+        e.printStackTrace();
+        Toast.makeText(activityGlobal, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+    }
+
+
+        /* AudioTool.getInstance(this)
+                .withAudio(inputfile)
+                .cutAudio()
+                */
+
     }
 }
